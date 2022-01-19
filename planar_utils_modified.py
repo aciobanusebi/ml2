@@ -3,8 +3,11 @@ import numpy as np
 import sklearn
 import sklearn.datasets
 import sklearn.linear_model
+from matplotlib.colors import ListedColormap
 
 def plot_decision_boundary(model, X, y):
+    cmap_light = ListedColormap(['lightgreen', 'lightcoral'])
+    cmap_bold = ListedColormap(['green','red'])
     X = X.T
     y = y[np.newaxis,...]
     # Set min and max values and give it some padding
@@ -17,10 +20,10 @@ def plot_decision_boundary(model, X, y):
     Z = model(np.c_[xx.ravel(), yy.ravel()])
     Z = Z.reshape(xx.shape)
     # Plot the contour and training examples
-    plt.contourf(xx, yy, Z, cmap=plt.cm.Spectral)
+    plt.contourf(xx, yy, Z, cmap=cmap_light)
     plt.ylabel('x2')
     plt.xlabel('x1')
-    plt.scatter(X[0, :], X[1, :], c=y[0,:], cmap=plt.cm.Spectral)
+    plt.scatter(X[0, :], X[1, :], c=y[0,:], cmap=cmap_bold)
     
 def load_planar_dataset():
     np.random.seed(1)
